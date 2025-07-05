@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I’m So Sorry 💔</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle, #fff0f0, #ffe3e3);
+      font-family: 'Open Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+    .card {
+      background: white;
+      padding: 3rem;
+      border-radius: 2rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      width: 90%;
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 1s ease-out;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      color: #d63384;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.2rem;
+      color: #444;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    button {
+      background-color: #e83e8c;
+      color: white;
+      font-size: 1.2rem;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+  button:hover {
+    transform: scale(1.05);
+  }
+  #hearts-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 999;
+  }
+  .heart {
+    position: absolute;
+    color: #ff69b4;
+    font-size: 2rem;
+    animation: float 4s linear forwards;
+  }
+  @keyframes float {
+    0% {
+      transform: translateY(100vh) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-10vh) scale(1.5);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>I'm Sorry 💔</h1>
+  <p>I know I’ve stressed you out and made things harder than they needed to be. I never meant to hurt you.
+  You mean the world to me and I hate seeing you upset.
+  Please forgive me — I'll make sure to trust you better</p>
+  <button id="forgiveBtn">I Forgive You 💗</button>
+</div>
+
+<div id="hearts-container"></div>
+<audio id="bgMusic" autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2023/01/11/audio_7abf82ba96.mp3?filename=soft-piano-141997.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const forgiveBtn = document.getElementById("forgiveBtn");
+    const heartContainer = document.getElementById("hearts-container");
+    const audio = document.getElementById("bgMusic");
+
+    forgiveBtn.addEventListener("click", () => {
+      triggerHearts();
+      triggerConfetti();
+      forgiveBtn.textContent = "Thank You 💕";
+      audio.play();
+    });
+
+    function triggerHearts() {
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 10 + "px";
+        heartContainer.appendChild(heart);
+          setTimeout(() => heart.remove(), 4000);
+        }
+      }
+
+      function triggerConfetti() {
+        confetti({
+          particleCount: 80,
+          spread: 100,
+          origin: { y: 0.6 },
+        });
+      }
+    });
+  </script>
+</body>
+</html>
